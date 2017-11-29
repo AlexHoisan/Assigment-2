@@ -1,7 +1,6 @@
 <template>
-<div>
-	<div v-for="(value, index) in dishes">
-		<div class="modal fade bd-example-modal-lg" :id="'Modal' + index" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="food-box">
+		<div class="modal fade bd-example-modal-lg" :id="'Modal' + index" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  v-for="(value, index) in dishes">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -16,7 +15,7 @@
 								<ul>
 									<li>
 										<div class="col-sm-10">
-											<img :src="dishes[index].img" alt="{{ dishes[index].name" class="img-fluid">
+											<img :src="dishes[index].img" :alt="dishes[index].name" class="img-fluid">
 										</div>
 									</li>
 									<li>
@@ -29,12 +28,12 @@
 											</li>
 											<li>
 												<select name="order-quantity" id="order-quantity">
-																		<option value="1" selected>1</option>
-																		<option value="2">2</option>
-																		<option value="3">3</option>
-																		<option value="4">4</option>
-																		<option value="5">5</option>
-																	</select>
+													<option value="1" selected>1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+												</select>
 											</li>
 										</ul>
 									</li>
@@ -44,13 +43,12 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn add-to-cart" data-name="Korean bibimbap" data-price="15.00">Add to cart</button>
+						<button type="button" class="btn add-to-cart" :data-name="dishes[index].name" :data-price="dishes[index].price">Add to cart</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 
 
@@ -88,36 +86,35 @@
 						price: '$10.00'
 					},
 					{
-						img:'./src/assets/img/5.jpg',
-						name:'Paleo beef steak with vegetables',
+						img: './src/assets/img/5.jpg',
+						name: 'Paleo beef steak with vegetables',
 						text: 'Description',
-						type:'Second courses',
-						price:'$35.00'
+						type: 'Second courses',
+						price: '$35.00'
 					},
 					{
-						img:'./src/assets/img/6.jpg',
-						name:'Healthy baguette with egg and vegetables',
+						img: './src/assets/img/6.jpg',
+						name: 'Healthy baguette with egg and vegetables',
 						text: 'Description',
-						type:'Entrees',
-						price:'$9.00'
+						type: 'Entrees',
+						price: '$9.00'
 					},
 					{
-						img:'./src/assets/img/7.jpg',
-						name:'Burger with cheddar and bacon',
+						img: './src/assets/img/7.jpg',
+						name: 'Burger with cheddar and bacon',
 						text: 'Description',
-						type:'Second courses',
-						price:'$13.00'
+						type: 'Second courses',
+						price: '$13.00'
 					},
 					{
-						img:'./src/assets/img/8.jpg',
-						name:'Granola with cherries and strawberries',
+						img: './src/assets/img/8.jpg',
+						name: 'Granola with cherries and strawberries',
 						text: 'Description',
-						type:'Salads',
-						price:'$8.00'
+						type: 'Salads',
+						price: '$8.00'
 					}
 				]
 			}
 		}
-
 	}
 </script>
