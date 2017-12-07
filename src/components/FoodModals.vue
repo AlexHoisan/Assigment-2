@@ -27,12 +27,9 @@
 												<label for="order-quantity">Quantity?</label>
 											</li>
 											<li>
-												<select name="order-quantity" id="order-quantity">
-													<option value="1" selected>1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
+												<select name="order-quantity" id="order-quantity"
+												v-model.lazy.number="selectedQuantity">
+													<option v-for="qunatity in quantities"> {{ qunatity }}</option>
 												</select>
 											</li>
 										</ul>
@@ -43,7 +40,12 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn add-to-cart" :data-name="dishes[index].name" :data-price="dishes[index].price">Add to cart</button>
+						<button type="button"
+						class="btn add-to-cart"
+						:data-name="dishes[index].name"
+						:data-price="dishes[index].price"
+						@click="addItemToCart(dishes[index].name, dishes[index].price, selectedQuantity)"
+						>Add to cart</button>
 					</div>
 				</div>
 			</div>
@@ -55,66 +57,98 @@
 <script>
 	export default {
 		data: function() {
-			return {
-				dishes: [
-					{
+			return {				
+				cart: [],
+				selectedQuantity: '1',
+				quantities: ['1', '2', '3', '4', '5'],
+				dishes: [{
 						img: './src/assets/img/1.jpg',
-						name: 'Korean bibimbap with egg and vegetables',
+						name: "Korean bibimbap with egg and vegetables",
 						text: "Koreans believe it heals the body, releases energy and keeps illness away through the winter. 'We say it's Everything in a spoon!'",
 						type: 'Second courses',
-						price: '$15.00'
+						price: 15.00,
+						vegetarian: 'Yes'
 					},
 					{
 						img: './src/assets/img/2.jpg',
 						name: 'Simple italian pizza with cherry tomatoes',
 						text: 'A variety of fresh tomatoes and herbs top this homemade Tomato-Ricotta Pizza, adding colorful appeal as well fresh flavor.',
 						type: 'Second courses',
-						price: '$13.00'
+						price: 13.00,
+						vegetarian: 'Yes'
 					},
 					{
 						img: './src/assets/img/3.jpg',
 						name: 'Chicken breast steak with vegetables',
 						text: "Marinated to burst with flavour, chicken pieces are sizzled on a pan till they're cooked just right.",
 						type: 'Second courses',
-						price: '$16.00'
+						price: 16.00,
+						vegetarian: 'No'
 					},
 					{
 						img: './src/assets/img/4.jpg',
 						name: 'Autumn pumpkin soup',
 						text: 'Description',
 						type: 'Entrees',
-						price: '$10.00'
+						price: 10.00,
+						vegetarian: 'Yes'
 					},
 					{
 						img: './src/assets/img/5.jpg',
 						name: 'Paleo beef steak with vegetables',
 						text: 'Description',
 						type: 'Second courses',
-						price: '$35.00'
+						price: 35.00,
+						vegetarian: 'No'
 					},
 					{
 						img: './src/assets/img/6.jpg',
 						name: 'Healthy baguette with egg and vegetables',
 						text: 'Description',
 						type: 'Entrees',
-						price: '$9.00'
+						price: 9.00,
+						vegetarian: 'Yes'
 					},
 					{
 						img: './src/assets/img/7.jpg',
 						name: 'Burger with cheddar and bacon',
 						text: 'Description',
 						type: 'Second courses',
-						price: '$13.00'
+						price: 13.00,
+						vegetarian: 'No'
 					},
 					{
 						img: './src/assets/img/8.jpg',
 						name: 'Granola with cherries and strawberries',
 						text: 'Description',
 						type: 'Salads',
-						price: '$8.00'
+						price: 8.00,
+						vegetarian: 'Yes'
 					}
 				]
+			}
+		},
+		methods: {
+			addItemToCart(name, price, count) {
+				let item = {
+					name : name,
+					price : price,
+					count : parseInt(count)
+				};
+				for (let i=0; i < this.cart.length; i++) {
+					if (this.cart[i].name === name) {
+						this.cart[i].count += parseInt(count);
+						console.log(this.cart.length);
+						return;
+					}
+				}				
+				this.cart.push(item);
+				
+				this.$emit('cartChanged', this.cart);
+				console.log(this.cart);
 			}
 		}
 	}
 </script>
+
+

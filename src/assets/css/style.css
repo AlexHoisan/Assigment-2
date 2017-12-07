@@ -159,6 +159,8 @@ header {
 	color: #fff;
 }
 
+.ion-close-round {}
+
 /*-----------------------------------------*/
 
 /* SECTION DROPDOWNS */
@@ -178,6 +180,43 @@ header {
 	padding-left: 0;
 }
 
+/*----- Price Range ----*/
+
+#rangeBar {
+	position: absolute;
+	right: 0;
+	width: 30%;
+}
+
+#rangeBar p {
+	margin: 0;
+}
+.slider {
+	-webkit-appearance: none;
+	width: 70%;
+	height: 10px;
+	border: 2px solid white;
+	border-radius: 5px;
+	background: #e67e22;
+	outline: none;
+	opacity: 0.7;
+	transition: opacity .2s; }
+
+.slider:hover {
+  	opacity: 1; 
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	border: 2px solid white;
+	border-radius: 50%;
+	background: #dc831a;
+	cursor: pointer;
+}
+
 /*-----------------------------------------*/
 
 /* SECTION FOOD */
@@ -192,20 +231,17 @@ header {
 .food-box {
 	list-style: none;
 	width: 100%;
-	margin: 0;
 	height: auto;
 }
 
 .food-box li {
-	display: block;
-	float: left;
+	display: inline-block;
 	width: 25%;
-	height: 100%;
+	height: 450px;
 }
 
 .food-photo {
 	margin: 0;
-	overflow: hidden;
 	background-color: #fff;
 	height: 100%;
 }
@@ -257,7 +293,8 @@ h5 {
 }
 
 .modal li {
-	display: inline-block;
+	display: block;
+	float: left;
 	max-height: 200px;
 	width: 50%;
 	overflow: hidden;
@@ -744,7 +781,7 @@ table p {
 		display: block;
 		float: left;
 		width: 100%;
-		height: 25%;
+		height: auto;
 	}
 
 	h6 {
