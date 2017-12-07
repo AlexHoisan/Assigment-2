@@ -129,8 +129,8 @@
 					item.push(this.cart[i]);
 					let itemCopy = {};
 					for (let p=0; p < item.length; p++) {
-						itemCopy[p] = item[p];
-						itemCopy[p].total = (itemCopy[p].price * itemCopy[p].count).toFixed(2);
+						itemCopy = item[p];
+						itemCopy.total = (itemCopy.price * itemCopy.count).toFixed(2);
 					}
 					
 					cartCopy.push(itemCopy);
