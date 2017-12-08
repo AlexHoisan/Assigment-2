@@ -473,7 +473,7 @@ footer p {
 }
 
 .cart-icon span {
-	font-size: 1rem;
+	font-size: 2rem;
 	font-weight: 600;
 	color: #e67e22;
 }
@@ -499,7 +499,7 @@ td {
 	background-color: #f0f0f2;
 	text-align: center;
 	color: #e67e22;
-	font-weight: 300;
+	font-weight: 400;
 	height: 5vh;
 	border-bottom: 1px solid #fff;
 	border-top: 1px solid #fff;
