@@ -1,24 +1,29 @@
 <template>
 	<tbody id="show-cart">
 		<tr v-for="(value, index) in cart"
-				:cart="cart"
-				:index="index"
-				@cartChanged="cart = $event">		
-				<app-position :cart="cart"
-				:index="index"
-				@cartChanged="cart = $event"></app-position>
-				<app-item-name :cart="cart"
-				:index="index"
-				@cartChanged="cart = $event"></app-item-name>
-				<app-item-count :cart="cart"
-				:index="index"
-				@cartChanged="cart = $event"></app-item-count>
-				<app-item-price :cart="cart"
-				:index="index"
-				@cartChanged="cart = $event"></app-item-price>
-				<app-item-total :cart="cart"
-				:index="index"
-				@cartChanged="cart = $event"></app-item-total>		
+			:cart="cart"
+			:index="index"
+			@cartChanged="cart = $event">		
+			<app-position :cart="cart"
+						  :index="index"
+						  @cartChanged="cart = $event"
+						  ></app-position>
+			<app-item-name :cart="cart"
+						   :index="index"
+						   @cartChanged="cart = $event"
+						   ></app-item-name>
+			<app-item-count :cart="cart"
+							:index="index"
+							@cartChanged="cart = $event"
+							></app-item-count>
+			<app-item-price :cart="cart"
+							:index="index"
+							@cartChanged="cart = $event"
+							></app-item-price>
+			<app-item-total :cart="cart"
+							:index="index"
+							@cartChanged="cart = $event"
+							></app-item-total>		
 		  </tr>
 	  </tbody>
 </template>
@@ -38,16 +43,6 @@
 			},
 			index: {
 				default: 0
-			}
-		},
-		data() {
-			return{
-				
-			}
-		},
-		methods: {			
-			bla() {
-				console.log(this.cart);
 			}
 		}
 	}

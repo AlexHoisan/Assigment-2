@@ -23,7 +23,6 @@
 		},
 		methods: {
 			removeItemFromCart(name) {
-				console.log('remove');
 				for (let i = 0; i < this.cart.length; i++) {
 					if (this.cart[i].name === name) {
 						this.cart[i].count--;

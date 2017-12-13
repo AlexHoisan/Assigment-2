@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-			<i class="ion-android-cart cart-icon" data-toggle="modal" data-target=".modal-dashboard"><span id="count-cart">{{countCart()}}</span></i>
+			<i class="ion-android-cart cart-icon" data-toggle="modal" data-target=".modal-dashboard"><span id="count-cart">{{ countCart() }}</span></i>
 		</div>
 		<div class="modal fade modal-dashboard" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-dashboard">
@@ -25,10 +25,7 @@
 											<th> </th>
 										</tr>
 									</thead>
-										<app-item-cart 
-										:cart="cart"
-										@cartChanged="cart = $event">
-										</app-item-cart>
+										<app-item-cart :cart="cart"></app-item-cart>
 								</table>
 								<div class="table-footer">
 									<button id="clear-cart" @click="clearCart">Clear Cart</button>

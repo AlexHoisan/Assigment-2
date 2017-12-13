@@ -27,8 +27,9 @@
 												<label for="order-quantity">Quantity?</label>
 											</li>
 											<li>
-												<select name="order-quantity" id="order-quantity"
-												v-model.number="selectedQuantity">
+												<select name="order-quantity"
+														id="order-quantity"
+														v-model.number="selectedQuantity">
 													<option v-for="qunatity in quantities"> {{ qunatity }}</option>
 												</select>
 											</li>
@@ -40,12 +41,11 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button"
-						class="btn add-to-cart"
-						:data-name="dishes[index].name"
-						:data-price="dishes[index].price"
-						@click="addItemToCart(dishes[index].name, dishes[index].price, selectedQuantity)"
-						>Add to cart</button>
+						<button type="button" class="btn add-to-cart"
+											  :data-name="dishes[index].name"
+											  :data-price="dishes[index].price"
+											  @click="addItemToCart(dishes[index].name, dishes[index].price, selectedQuantity)"
+											  >Add to cart</button>
 					</div>
 				</div>
 			</div>
@@ -143,14 +143,11 @@
 				for (let i=0; i < this.cart.length; i++) {
 					if (this.cart[i].name === name) {
 						this.cart[i].count += parseInt(count);
-						console.log(this.cart.length);
 						return;
 					}
 				}				
-				this.cart.push(item);
-				
+				this.cart.push(item);				
 				this.$emit('cartChanged', this.cart);
-				console.log(this.cart);
 			}
 		}
 	}

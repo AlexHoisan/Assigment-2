@@ -17,6 +17,8 @@ import ItemCount from './components/CartComponents/ItemCount.vue'
 import ItemPrice from './components/CartComponents/ItemPrice.vue'
 import ItemTotal from './components/CartComponents/ItemTotal.vue'
 import ItemCart from './components/ItemCart.vue'
+import InfiniteLoading from 'vue-infinite-loading';
+import _ from 'lodash';
 
 
 Vue.component('app-nav', Nav);
@@ -35,6 +37,7 @@ Vue.component('app-item-count', ItemCount);
 Vue.component('app-item-price', ItemPrice);
 Vue.component('app-item-total', ItemTotal);
 Vue.component('app-item-cart', ItemCart);
+Vue.component('InfiniteLoading', InfiniteLoading);
 
 
 
