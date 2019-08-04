@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-			<i class="ion-android-cart cart-icon" data-toggle="modal" data-target=".modal-dashboard" @click="showCart"><span id="count-cart">X</span></i>
+			<i class="ion-android-cart cart-icon" data-toggle="modal" data-target=".modal-dashboard"><span id="count-cart">{{countCart()}}</span></i>
 		</div>
 		<div class="modal fade modal-dashboard" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-dashboard">
@@ -25,13 +25,14 @@
 											<th> </th>
 										</tr>
 									</thead>
-									<tbody id="show-cart">
-
-									</tbody>
+										<app-item-cart 
+										:cart="cart"
+										@cartChanged="cart = $event">
+										</app-item-cart>
 								</table>
 								<div class="table-footer">
-									<button id="clear-cart">Clear Cart</button>
-									<div class="total">Total Cart: $ <span id="total-cart"></span></div>
+									<button id="clear-cart" @click="clearCart">Clear Cart</button>
+									<div class="total">Total Cart: $ <span id="total-cart">{{ totalCart() }}</span></div>
 								</div>
 							</div>
 						</div>
@@ -45,6 +46,7 @@
 
 <script>
 	import FoodModals from './FoodModals.vue'
+	import ItemCart from './ItemCart.vue'
 	
 	export default {
 		props: {
@@ -122,71 +124,22 @@
 			}
 		},
 		methods: {
-			listCart() {
-				let cartCopy = [];
-				for (let i=0; i < this.cart.length; i++) {
-					let item = [];
-					item.push(this.cart[i]);
-					let itemCopy = {};
-					for (let p=0; p < item.length; p++) {
-						itemCopy[p] = item[p];
-						itemCopy[p].total = (itemCopy[p].price * itemCopy[p].count).toFixed(2);
-					}
-					
-					cartCopy.push(itemCopy);
-					console.log("itemCopy");
-					console.log(itemCopy);
-				}
-				console.log("cartCopy");
-				console.log(cartCopy);
-				return cartCopy;
-				
+			clearCart() {
+				this.cart = [];
 			},
-			
-			displayCart() {
-				let cartArray = this.listCart();
-				let output = "";
-				let position = 1;
-				console.log('merge');
-				console.log(cartArray);
-				for (let i = 0; i < cartArray.length; i++) {
-					output += `
-							  <tr>
-								<td>
-								  <button class='delete-item' data-name='"+cartArray[i].name+"'>X</button>
-								  <p>${position}</p>
-								</td>
-								<td>
-								  ${cartArray[i].name}
-								</td>
-								<td>
-								  <span>${cartArray[i].count}</span>
-								  <div class='add-remove-buttons'>
-									<button class='plus-item' data-name='${cartArray[i].name}'>+</button>
-									<button class='substract-item' data-name='${cartArray[i].name}'> - </button>
-								  </div>
-								</td>
-								<td>
-								  ${cartArray[i].price}
-								</td>
-								<td>
-								  ${cartArray[i].total}
-								</td>
-							  </tr>
-							`
-
-					position++;
-					console.log('for');
+			totalCart() {
+				let totalCost = 0;
+				for (let i = 0; i < this.cart.length; i++) {
+					totalCost += this.cart[i].price * this.cart[i].count;
 				}
-			$("#show-cart").html(output);
-//				$("#count-cart").html(shoppingCart.countCart())
-//				$("#total-cart").html(shoppingCart.totalCart());
+				return totalCost.toFixed(2);
 			},
-			
-			showCart() {
-				this.listCart();
-				this.displayCart();
-				console.log(this.cartCopy);
+			countCart() {
+				let totalCount = 0;
+				for (let i = 0; i < this.cart.length; i++) {
+					totalCount += this.cart[i].count;
+				}
+				return totalCount;
 			}
 		}
 	}

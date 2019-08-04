@@ -28,7 +28,7 @@
 											</li>
 											<li>
 												<select name="order-quantity" id="order-quantity"
-												v-model.lazy.number="selectedQuantity">
+												v-model.number="selectedQuantity">
 													<option v-for="qunatity in quantities"> {{ qunatity }}</option>
 												</select>
 											</li>
@@ -56,9 +56,14 @@
 
 <script>
 	export default {
+		props: {
+			cart: {
+				default: [],
+				type: Array
+			}
+		},
 		data: function() {
-			return {				
-				cart: [],
+			return {
 				selectedQuantity: '1',
 				quantities: ['1', '2', '3', '4', '5'],
 				dishes: [{
