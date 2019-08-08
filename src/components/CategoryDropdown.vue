@@ -2,11 +2,11 @@
 	<div class="dropdown">
 		<button class="btn btn-light dropdown-toggle btn-assigment" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Category
-		  </button>
+		</button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<a class="dropdown-item"
-			v-for="value in categories"
-			@click="categoryFunction(value)">{{ value }}</a>
+			<a class="dropdown-item" v-for="value in categories"
+									 @click="categoryFunction(value)"
+									 >{{ value }}</a>
 		</div>
 	</div>	
 </template>
@@ -28,7 +28,6 @@
 			categoryFunction(value) {
 				this.userCategory = value;
 				this.$emit('categoryChanged', this.userCategory);
-				console.log(this.userCategory);
 			}
 		}
 	}

@@ -1,18 +1,18 @@
 <template>
-	<ul class="food-box" @click="myFun">
-		<li data-toggle="modal"
-		:data-target="'#Modal' + index"
-		v-if="(userCategory == dishes[index].type || userCategory == 'All products')
-		&& (userVegetarian == 'All products' || userVegetarian == dishes[index].vegetarian)
-		&& priceBar >= dishes[index].price"
-		v-for="(value, index) in dishes">
+	<ul class="food-box">
+		<li data-toggle="modal"	:data-target="'#Modal' + index"
+								v-if="(userCategory == listDishes[index].type || userCategory == 'All products')
+								&& (userVegetarian == 'All products' || userVegetarian == listDishes[index].vegetarian)
+								&& priceBar >= listDishes[index].price"
+								v-for="(value, index) in listDishes">
 			<figure class="food-photo img-thumbnail">
-				<img class="img-fluid" :src="dishes[index].img" :alt="dishes[index].name">
-				<h6>{{ dishes[index].name }}</h6>
-				<p>{{ dishes[index].type }}</p>
-				<p class="food-price">$ {{ dishes[index].price }}</p>
+				<img class="img-fluid" :src="listDishes[index].img" :alt="listDishes[index].name">
+				<h6>{{ listDishes[index].name }}</h6>
+				<p>{{ listDishes[index].type }}</p>
+				<p class="food-price">$ {{ listDishes[index].price }}</p>
 			</figure>		
 		</li>
+		<infinite-loading v-show="switchLoad" @infinite="infiniteHandler"></infinite-loading>
 	</ul>
 </template>
 
@@ -38,9 +38,46 @@
 				type: Number
 			},
 		},
+		watch: {
+			userSorting: function (val) {
+				this.compareDishes();
+			}
+		},
 		methods: {
-			myFun() {
-				console.log(this.priceBar);
+			compareDishes() {
+				if (this.userSorting === 'Price') {
+					const sortingDishes = this.listDishes;
+					this.copyDishes = this.listDishes.slice();
+					function compare(a, b) {
+					  const priceA = a.price;
+					  const priceB = b.price;
+
+					  let comparison = 0;
+					  if (priceA > priceB) {
+						comparison = 1;
+					  } else if (priceA < priceB) {
+						comparison = -1;
+					  }
+					  return comparison;
+					}					
+					console.log(sortingDishes.sort(compare));
+				} else if (this.userSorting === 'Random') {
+					this.listDishes = this.copyDishes.slice();
+				}			
+			},
+			infiniteHandler($state) {
+				setTimeout(() => {
+					const temp = [];
+					for (let i = this.listDishes.length; i <= this.listDishes.length + 3; i++) {
+						if (i < this.dishes.length) {
+							temp.push(this.dishes[i]);
+						} else {
+							this.switchLoad = false;
+						}
+					}
+					this.listDishes = this.listDishes.concat(temp);
+					$state.loaded();
+				}, 1000);
 			}
 		},
 		data: function() {
@@ -109,7 +146,10 @@
 						price: 8.00,
 						vegetarian: 'Vegetarian products'
 					}
-				]
+				],
+				copyDishes: [],
+				listDishes: [],
+				switchLoad: true
 			}
 		}
 	}
